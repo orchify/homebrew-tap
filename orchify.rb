@@ -8,21 +8,21 @@ run an Orchify local runtime so your own machine acts as an execution
 runner for your workspace's AI agent jobs.
 "
   homepage "https://github.com/orchify/orchify"
-  version "0.0.7"
+  version "0.0.8"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.7/orchify_0.0.7_darwin_amd64.tar.gz"
-      sha256 "5af8f5cc37371f8845b7a4969554c16969a22b9011275754a2c92d7e930f042c"
+      url "https://github.com/orchify/orchify-cli/releases/download/v0.0.8/orchify_0.0.8_darwin_amd64.tar.gz"
+      sha256 "0adc2e93631cf90930611ab2c760952a8e56bf479969e6774b7de4b67afc0364"
 
       define_method(:install) do
         bin.install "orchify"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.7/orchify_0.0.7_darwin_arm64.tar.gz"
-      sha256 "e18b0a87aad1ae8e3b55a878300ffacdce6a0d9137afe81eb4fed06682a6f1c6"
+      url "https://github.com/orchify/orchify-cli/releases/download/v0.0.8/orchify_0.0.8_darwin_arm64.tar.gz"
+      sha256 "32d8c78f8a6704e802a33de7eb198585758b1c78b069d3e2e14b7ee9ddcd87cf"
 
       define_method(:install) do
         bin.install "orchify"
@@ -32,15 +32,15 @@ runner for your workspace's AI agent jobs.
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.7/orchify_0.0.7_linux_amd64.tar.gz"
-      sha256 "ee64497e3fceb5b81bee17d5005e49d544e64393731e440cfccc770d061b0975"
+      url "https://github.com/orchify/orchify-cli/releases/download/v0.0.8/orchify_0.0.8_linux_amd64.tar.gz"
+      sha256 "e599d067311835a53395d3746bdbdd307eb6c101df39d61527323803e2a31f1d"
       define_method(:install) do
         bin.install "orchify"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.7/orchify_0.0.7_linux_arm64.tar.gz"
-      sha256 "4a3629b913c43c1168227b15616b3c8ab3b622574c9ecef4c9cfc5a44e5b617e"
+      url "https://github.com/orchify/orchify-cli/releases/download/v0.0.8/orchify_0.0.8_linux_arm64.tar.gz"
+      sha256 "4fc34236bcc7fe99bb753795b96d51854abc2bd93970ee06a02ca58a5d972b19"
       define_method(:install) do
         bin.install "orchify"
       end
