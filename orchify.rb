@@ -8,21 +8,21 @@ run an Orchify local runtime so your own machine acts as an execution
 runner for your workspace's AI agent jobs.
 "
   homepage "https://github.com/orchify/orchify"
-  version "0.0.4"
+  version "0.0.6"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.4/orchify_0.0.4_darwin_amd64.tar.gz"
-      sha256 "b7339ddbbbd55ea7fe480019f1ac7336bc6180388b74468ddb9221f651608c28"
+      url "https://github.com/orchify/orchify/releases/download/v0.0.6/orchify_0.0.6_darwin_amd64.tar.gz"
+      sha256 "aa1832f700418698590703498980939bb20ffbf299820d9ca12617bc88e7df9c"
 
       define_method(:install) do
         bin.install "orchify"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.4/orchify_0.0.4_darwin_arm64.tar.gz"
-      sha256 "3cdd1aed5c3a4e2f42af0720a05066de17925dab0d0ce06016f307aa4b699efe"
+      url "https://github.com/orchify/orchify/releases/download/v0.0.6/orchify_0.0.6_darwin_arm64.tar.gz"
+      sha256 "468a9f1abd755f255a8b5c07bdc2abfaebb90f87ffe122f7679ffcb520e3d092"
 
       define_method(:install) do
         bin.install "orchify"
@@ -32,15 +32,15 @@ runner for your workspace's AI agent jobs.
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.4/orchify_0.0.4_linux_amd64.tar.gz"
-      sha256 "fd3f0405568e5a69edab783ed2cb29fb66351b953e87fd5fc1e4b886e856ec2e"
+      url "https://github.com/orchify/orchify/releases/download/v0.0.6/orchify_0.0.6_linux_amd64.tar.gz"
+      sha256 "a33b8f624c02fc9e2ca9162b63be33dec79f3fbb988fa8fe411373fbe8068f49"
       define_method(:install) do
         bin.install "orchify"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/orchify/orchify/releases/download/v0.0.4/orchify_0.0.4_linux_arm64.tar.gz"
-      sha256 "de46ba9d78de3a74812083cc151001d28c8e5a9d5b9ae9ec0318d95a90952cb9"
+      url "https://github.com/orchify/orchify/releases/download/v0.0.6/orchify_0.0.6_linux_arm64.tar.gz"
+      sha256 "f04242384f2156cc7d9b5a32be9cfa88d50ce4945d9a7198f6ffa0ffd38f4981"
       define_method(:install) do
         bin.install "orchify"
       end
@@ -50,23 +50,23 @@ runner for your workspace's AI agent jobs.
   def caveats
     <<~EOS
       To run orchify as a background service with `brew services start orchify`,
-      set the following environment variables before starting the service:
+      first authenticate once:
+
+        orchify login
+
+      Then set the following environment variables before starting the service:
 
         export ORCHIFY_API_BASE_URL=https://your-orchify-instance.example.com
-        export ORCHIFY_RUNNER_TOKEN=your-runner-token
 
       Alternatively, pass the flags directly:
 
-        orchify runtime local \
-          --api-base-url https://your-orchify-instance.example.com \
-          --runner-token your-runner-token
+        orchify start --api-base-url https://your-orchify-instance.example.com
     EOS
   end
 
   service do
-    run [opt_bin/"orchify", "runtime", "local",
-         "--api-base-url", "#{ENV["ORCHIFY_API_BASE_URL"]}",
-         "--runner-token", "#{ENV["ORCHIFY_RUNNER_TOKEN"]}"]
+    run [opt_bin/"orchify", "start",
+         "--api-base-url", "#{ENV["ORCHIFY_API_BASE_URL"]}"]
     keep_alive true
     log_path var/"log/orchify.log"
     error_log_path var/"log/orchify.log"
